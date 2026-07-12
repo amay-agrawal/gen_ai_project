@@ -1,0 +1,3 @@
+export declare const REWRITE_PROMPT = "Rewrite the given text in the requested mode, preserving the original meaning and any names/numbers exactly. Return ONLY the rewritten text, no commentary.\n\nMode = \"professional\": elevate tone, remove slang/casualness.\nMode = \"concise\": cut to essential meaning, target ~50% of original length.\nMode = \"expand\": add helpful detail/context, roughly double the length.";
+export declare function buildRewriteMessage(mode: string, selectedText: string): string;
+//# sourceMappingURL=rewrite.d.ts.map

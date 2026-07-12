@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "MailPilot",
+  "version": "1.0.0",
+  "description": "Smart AI assistant for Gmail composing and thread summarization.",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "MailPilot"
+  },
+  "background": {
+    "service_worker": "src/background/index.ts",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://mail.google.com/*"],
+      "js": ["src/content/index.tsx"]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://mail.google.com/*",
+    "http://localhost:4000/*"
+  ]
+}
