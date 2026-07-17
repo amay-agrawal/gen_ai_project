@@ -2,9 +2,13 @@ import mongoose, { Schema } from 'mongoose';
 const UserSchema = new Schema({
     googleId: {
         type: String,
-        required: true,
         unique: true,
+        sparse: true,
         index: true,
+    },
+    password: {
+        type: String,
+        trim: true,
     },
     email: {
         type: String,

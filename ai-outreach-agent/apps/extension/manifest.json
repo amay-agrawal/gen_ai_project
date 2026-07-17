@@ -8,13 +8,13 @@
     "default_title": "MailPilot"
   },
   "background": {
-    "service_worker": "src/background/index.ts",
+    "service_worker": "src/background/index.js",
     "type": "module"
   },
   "content_scripts": [
     {
       "matches": ["*://mail.google.com/*"],
-      "js": ["src/content/index.tsx"]
+      "js": ["src/content/index.jsx"]
     }
   ],
   "permissions": [

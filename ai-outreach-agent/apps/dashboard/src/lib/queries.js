@@ -9,6 +9,22 @@ export const useUser = () =>
     retry: false,
   });
 
+export const useLogin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data) => apiClient.post('/auth/login', data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['user'] }),
+  });
+};
+
+export const useRegister = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data) => apiClient.post('/auth/register', data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['user'] }),
+  });
+};
+
 // Dashboard
 export const useDashboardSummary = () =>
   useQuery({

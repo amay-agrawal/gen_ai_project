@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { google } from 'googleapis';
+import bcrypt from 'bcryptjs';
 import { config } from '../config/index.js';
 import { User } from '../models/User.js';
 import { GmailService } from '../services/gmail.service.js';
@@ -80,6 +81,109 @@ router.get('/google/callback', async (req, res, next) => {
         });
         // Redirect to frontend with token in URL for SPA pickup
         res.redirect(`${config.frontendUrl}/auth/callback?token=${accessToken}`);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+/**
+ * POST /auth/register — Register a new user with email and password
+ */
+router.post('/register', async (req, res, next) => {
+    try {
+        const { name, email, password } = req.body;
+        if (!name || !email || !password) {
+            sendError(res, 'BAD_REQUEST', 'Missing name, email, or password', 400);
+            return;
+        }
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            sendError(res, 'BAD_REQUEST', 'User with this email already exists', 400);
+            return;
+        }
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        let user = await User.create({
+            name,
+            email,
+            password: hashedPassword,
+            role: 'admin',
+        });
+        user.orgId = user._id;
+        await user.save();
+        const accessToken = generateAccessToken(user);
+        const refreshToken = generateRefreshToken(user._id.toString());
+        res.cookie('token', accessToken, {
+            httpOnly: true,
+            secure: !config.isDev,
+            sameSite: 'lax',
+            maxAge: 15 * 60 * 1000,
+        });
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            secure: !config.isDev,
+            sameSite: 'lax',
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+        sendSuccess(res, {
+            user: {
+                _id: user._id.toString(),
+                email: user.email,
+                name: user.name,
+                role: user.role,
+                orgId: user.orgId.toString(),
+            },
+            token: accessToken,
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+});
+/**
+ * POST /auth/login — Login with email and password
+ */
+router.post('/login', async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            sendError(res, 'BAD_REQUEST', 'Missing email or password', 400);
+            return;
+        }
+        const user = await User.findOne({ email });
+        if (!user || !user.password) {
+            sendError(res, 'UNAUTHORIZED', 'Invalid email or password', 401);
+            return;
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            sendError(res, 'UNAUTHORIZED', 'Invalid email or password', 401);
+            return;
+        }
+        const accessToken = generateAccessToken(user);
+        const refreshToken = generateRefreshToken(user._id.toString());
+        res.cookie('token', accessToken, {
+            httpOnly: true,
+            secure: !config.isDev,
+            sameSite: 'lax',
+            maxAge: 15 * 60 * 1000,
+        });
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            secure: !config.isDev,
+            sameSite: 'lax',
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+        sendSuccess(res, {
+            user: {
+                _id: user._id.toString(),
+                email: user.email,
+                name: user.name,
+                role: user.role,
+                orgId: user.orgId?.toString() || user._id.toString(),
+            },
+            token: accessToken,
+        });
     }
     catch (error) {
         next(error);
