@@ -1,3 +1,0 @@
-export declare const SUBJECT_LINE_PROMPT = "Write 1 concise, professional subject line (under 65 characters) for the email below. No quotation marks, no emoji unless the requested tone is \"casual\" or \"friendly\".\n\nReturn ONLY the subject line text, nothing else.";
-export declare function buildSubjectLineMessage(tone: string, bodySummary: string): string;
-//# sourceMappingURL=subjectLine.d.ts.map

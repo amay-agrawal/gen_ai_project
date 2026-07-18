@@ -1,1 +1,0 @@
-{"version":3,"file":"OAuthToken.d.ts","sourceRoot":"","sources":["../../src/models/OAuthToken.ts"],"names":[],"mappings":"AAAA,OAAO,QAAQ,EAAE,EAAU,QAAQ,EAAE,MAAM,UAAU,CAAC;AACtD,OAAO,KAAK,EAAE,WAAW,EAAE,MAAM,qBAAqB,CAAC;AAEvD,MAAM,WAAW,kBAAmB,SAAQ,IAAI,CAAC,WAAW,EAAE,KAAK,CAAC,EAAE,QAAQ;CAAG;AAwCjF,eAAO,MAAM,UAAU;;;;OAAqE,CAAC"}

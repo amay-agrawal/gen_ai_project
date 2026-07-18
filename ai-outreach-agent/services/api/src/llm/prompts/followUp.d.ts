@@ -1,3 +1,0 @@
-export declare const FOLLOW_UP_PROMPT = "Write a polite follow-up to an email that has not received a reply. Reference the original subject/topic naturally without repeating the entire original email. Keep it short (3-5 sentences). Do not sound impatient or pushy.\n\nRespond as JSON: { \"subject\": string, \"body\": string }\n\nDo not include any markdown fences in your response.";
-export declare function buildFollowUpMessage(daysSinceSent: number, sequenceNumber: number, originalSubject: string, originalSummary: string): string;
-//# sourceMappingURL=followUp.d.ts.map

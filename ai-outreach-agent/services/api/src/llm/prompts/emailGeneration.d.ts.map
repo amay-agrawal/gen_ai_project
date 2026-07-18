@@ -1,1 +1,0 @@
-{"version":3,"file":"emailGeneration.d.ts","sourceRoot":"","sources":["../../../src/llm/prompts/emailGeneration.ts"],"names":[],"mappings":"AAIA,eAAO,MAAM,uBAAuB,grCAUiB,CAAC;AAEtD,wBAAgB,2BAA2B,CACzC,UAAU,EAAE,MAAM,EAClB,eAAe,EAAE,MAAM,EACvB,aAAa,EAAE,MAAM,GACpB,MAAM,CAIR"}

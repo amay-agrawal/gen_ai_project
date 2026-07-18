@@ -1,1 +1,0 @@
-{"version":3,"file":"emailGeneration.js","sourceRoot":"","sources":["../../../src/llm/prompts/emailGeneration.ts"],"names":[],"mappings":"AAAA,MAAM,eAAe,GAAG;;6SAEqR,CAAC;AAE9S,MAAM,CAAC,MAAM,uBAAuB,GAAG,GAAG,eAAe;;;;;;;;;;qDAUJ,CAAC;AAEtD,MAAM,UAAU,2BAA2B,CACzC,UAAkB,EAClB,eAAuB,EACvB,aAAqB;IAErB,OAAO,WAAW,UAAU;uBACP,eAAe;kBACpB,aAAa,mBAAmB,CAAC;AACnD,CAAC"}

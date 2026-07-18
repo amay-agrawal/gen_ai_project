@@ -1,0 +1,12 @@
+langchain
+langchain-google-genai
+langchain-core
+python-dotenv
+pydantic
+chromadb
+pypdf
+docx2txt
+langchain-community
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
